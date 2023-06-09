@@ -1,11 +1,14 @@
 using DevJobs.API.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 var connectionString = builder.Configuration.GetConnectionString("DevJobsCs");
-builder.Services.AddDbContext<DevJobsContext>(options => options.("DevJobs"));
+
+builder.Services.AddDbContext<DevJobsContext>(options =>
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
